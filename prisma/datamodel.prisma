@@ -1,0 +1,51 @@
+type Book {
+    id: ID! @id
+    dateAdded: DateTime! @createdAt
+    title: String!
+    era: String!
+    author: ID! 
+    releaseDate: String!
+    imageId: String!
+    summary: String!
+    pages: Int!
+    isbn: Int!
+    timeLine: String!
+    series: String
+    bookStatus: ID! 
+    epochTime: ID!
+}
+
+type Era {
+    id: ID! @id
+    dateAdded: DateTime! @createdAt
+    name: String!
+    books: [Book!]!
+}
+
+type Author {
+    id: ID! @id
+    dateAdded: DateTime! @createdAt
+    name: String!
+    books: [Book!]!
+}
+
+type Series {
+    id: ID! @id
+    dateAdded: DateTime! @createdAt
+    name: String!
+    books: [Book!]!
+}
+
+type BookStatus {
+    id: ID! @id
+    dateAdded: DateTime! @createdAt
+    name: String!
+    books: [Book!]!
+}
+
+type EpochTime {
+    id: ID! @id
+    dateAdded: DateTime! @createdAt
+    name: String!
+    books: [Book!]!
+}
