@@ -5,6 +5,8 @@ type Query {
 
 type Mutation {
     post(title: String!, era: String!, author: ID!, releaseDate: String!, imageId: String!, summary: String!, pages: Int!, isbn: Int!, timeLine: String!, series: String, bookStatus: ID!, epochTime: ID!) : Book!
+    signup(email: String!, password: String!, name: String!) : AuthPayload
+    login(email: String!, password: String!) : AuthPayload
 }
 
 type Book {
@@ -23,32 +25,15 @@ type Book {
     epochTime: [EpochTime!]!
 }
 
-type Era {
-    id: ID!
-    name: String!
-    books: [Book!]!
+type AuthPayload {
+    token: String
+    user: User
 }
 
-type Author {
+type User {
     id: ID!
     name: String!
-    books: [Book!]!
-}
-
-type Series {
-    id: ID!
-    name: String!
-    books: [Book!]!
-}
-
-type BookStatus {
-    id: ID!
-    name: String!
-    books: [Book!]!
-}
-
-type EpochTime {
-    id: ID!
-    name: String!
+    email: String! @unique
+    password: String!
     books: [Book!]!
 }

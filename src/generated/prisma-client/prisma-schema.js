@@ -3,137 +3,12 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateAuthor {
+/* GraphQL */ `type AggregateBook {
   count: Int!
 }
 
-type AggregateBook {
+type AggregateUser {
   count: Int!
-}
-
-type AggregateBookStatus {
-  count: Int!
-}
-
-type AggregateEpochTime {
-  count: Int!
-}
-
-type AggregateEra {
-  count: Int!
-}
-
-type AggregateSeries {
-  count: Int!
-}
-
-type Author {
-  id: ID!
-  dateAdded: DateTime!
-  name: String!
-}
-
-type AuthorConnection {
-  pageInfo: PageInfo!
-  edges: [AuthorEdge]!
-  aggregate: AggregateAuthor!
-}
-
-input AuthorCreateInput {
-  id: ID
-  name: String!
-}
-
-type AuthorEdge {
-  node: Author!
-  cursor: String!
-}
-
-enum AuthorOrderByInput {
-  id_ASC
-  id_DESC
-  dateAdded_ASC
-  dateAdded_DESC
-  name_ASC
-  name_DESC
-}
-
-type AuthorPreviousValues {
-  id: ID!
-  dateAdded: DateTime!
-  name: String!
-}
-
-type AuthorSubscriptionPayload {
-  mutation: MutationType!
-  node: Author
-  updatedFields: [String!]
-  previousValues: AuthorPreviousValues
-}
-
-input AuthorSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: AuthorWhereInput
-  AND: [AuthorSubscriptionWhereInput!]
-  OR: [AuthorSubscriptionWhereInput!]
-  NOT: [AuthorSubscriptionWhereInput!]
-}
-
-input AuthorUpdateInput {
-  name: String
-}
-
-input AuthorUpdateManyMutationInput {
-  name: String
-}
-
-input AuthorWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  dateAdded: DateTime
-  dateAdded_not: DateTime
-  dateAdded_in: [DateTime!]
-  dateAdded_not_in: [DateTime!]
-  dateAdded_lt: DateTime
-  dateAdded_lte: DateTime
-  dateAdded_gt: DateTime
-  dateAdded_gte: DateTime
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  AND: [AuthorWhereInput!]
-  OR: [AuthorWhereInput!]
-  NOT: [AuthorWhereInput!]
-}
-
-input AuthorWhereUniqueInput {
-  id: ID
 }
 
 type BatchPayload {
@@ -145,7 +20,7 @@ type Book {
   dateAdded: DateTime!
   title: String!
   era: String!
-  author: ID!
+  author: String!
   releaseDate: String!
   imageId: String!
   summary: String!
@@ -153,8 +28,9 @@ type Book {
   isbn: Int!
   timeLine: String!
   series: String
-  bookStatus: ID!
-  epochTime: ID!
+  bookStatus: String!
+  epochTime: String!
+  postedBy: User
 }
 
 type BookConnection {
@@ -167,7 +43,7 @@ input BookCreateInput {
   id: ID
   title: String!
   era: String!
-  author: ID!
+  author: String!
   releaseDate: String!
   imageId: String!
   summary: String!
@@ -175,8 +51,30 @@ input BookCreateInput {
   isbn: Int!
   timeLine: String!
   series: String
-  bookStatus: ID!
-  epochTime: ID!
+  bookStatus: String!
+  epochTime: String!
+  postedBy: UserCreateOneWithoutBooksInput
+}
+
+input BookCreateManyWithoutPostedByInput {
+  create: [BookCreateWithoutPostedByInput!]
+  connect: [BookWhereUniqueInput!]
+}
+
+input BookCreateWithoutPostedByInput {
+  id: ID
+  title: String!
+  era: String!
+  author: String!
+  releaseDate: String!
+  imageId: String!
+  summary: String!
+  pages: Int!
+  isbn: Int!
+  timeLine: String!
+  series: String
+  bookStatus: String!
+  epochTime: String!
 }
 
 type BookEdge {
@@ -220,7 +118,7 @@ type BookPreviousValues {
   dateAdded: DateTime!
   title: String!
   era: String!
-  author: ID!
+  author: String!
   releaseDate: String!
   imageId: String!
   summary: String!
@@ -228,168 +126,11 @@ type BookPreviousValues {
   isbn: Int!
   timeLine: String!
   series: String
-  bookStatus: ID!
-  epochTime: ID!
+  bookStatus: String!
+  epochTime: String!
 }
 
-type BookStatus {
-  id: ID!
-  dateAdded: DateTime!
-  name: String!
-}
-
-type BookStatusConnection {
-  pageInfo: PageInfo!
-  edges: [BookStatusEdge]!
-  aggregate: AggregateBookStatus!
-}
-
-input BookStatusCreateInput {
-  id: ID
-  name: String!
-}
-
-type BookStatusEdge {
-  node: BookStatus!
-  cursor: String!
-}
-
-enum BookStatusOrderByInput {
-  id_ASC
-  id_DESC
-  dateAdded_ASC
-  dateAdded_DESC
-  name_ASC
-  name_DESC
-}
-
-type BookStatusPreviousValues {
-  id: ID!
-  dateAdded: DateTime!
-  name: String!
-}
-
-type BookStatusSubscriptionPayload {
-  mutation: MutationType!
-  node: BookStatus
-  updatedFields: [String!]
-  previousValues: BookStatusPreviousValues
-}
-
-input BookStatusSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: BookStatusWhereInput
-  AND: [BookStatusSubscriptionWhereInput!]
-  OR: [BookStatusSubscriptionWhereInput!]
-  NOT: [BookStatusSubscriptionWhereInput!]
-}
-
-input BookStatusUpdateInput {
-  name: String
-}
-
-input BookStatusUpdateManyMutationInput {
-  name: String
-}
-
-input BookStatusWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  dateAdded: DateTime
-  dateAdded_not: DateTime
-  dateAdded_in: [DateTime!]
-  dateAdded_not_in: [DateTime!]
-  dateAdded_lt: DateTime
-  dateAdded_lte: DateTime
-  dateAdded_gt: DateTime
-  dateAdded_gte: DateTime
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  AND: [BookStatusWhereInput!]
-  OR: [BookStatusWhereInput!]
-  NOT: [BookStatusWhereInput!]
-}
-
-input BookStatusWhereUniqueInput {
-  id: ID
-}
-
-type BookSubscriptionPayload {
-  mutation: MutationType!
-  node: Book
-  updatedFields: [String!]
-  previousValues: BookPreviousValues
-}
-
-input BookSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: BookWhereInput
-  AND: [BookSubscriptionWhereInput!]
-  OR: [BookSubscriptionWhereInput!]
-  NOT: [BookSubscriptionWhereInput!]
-}
-
-input BookUpdateInput {
-  title: String
-  era: String
-  author: ID
-  releaseDate: String
-  imageId: String
-  summary: String
-  pages: Int
-  isbn: Int
-  timeLine: String
-  series: String
-  bookStatus: ID
-  epochTime: ID
-}
-
-input BookUpdateManyMutationInput {
-  title: String
-  era: String
-  author: ID
-  releaseDate: String
-  imageId: String
-  summary: String
-  pages: Int
-  isbn: Int
-  timeLine: String
-  series: String
-  bookStatus: ID
-  epochTime: ID
-}
-
-input BookWhereInput {
+input BookScalarWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -440,20 +181,20 @@ input BookWhereInput {
   era_not_starts_with: String
   era_ends_with: String
   era_not_ends_with: String
-  author: ID
-  author_not: ID
-  author_in: [ID!]
-  author_not_in: [ID!]
-  author_lt: ID
-  author_lte: ID
-  author_gt: ID
-  author_gte: ID
-  author_contains: ID
-  author_not_contains: ID
-  author_starts_with: ID
-  author_not_starts_with: ID
-  author_ends_with: ID
-  author_not_ends_with: ID
+  author: String
+  author_not: String
+  author_in: [String!]
+  author_not_in: [String!]
+  author_lt: String
+  author_lte: String
+  author_gt: String
+  author_gte: String
+  author_contains: String
+  author_not_contains: String
+  author_starts_with: String
+  author_not_starts_with: String
+  author_ends_with: String
+  author_not_ends_with: String
   releaseDate: String
   releaseDate_not: String
   releaseDate_in: [String!]
@@ -540,34 +281,326 @@ input BookWhereInput {
   series_not_starts_with: String
   series_ends_with: String
   series_not_ends_with: String
-  bookStatus: ID
-  bookStatus_not: ID
-  bookStatus_in: [ID!]
-  bookStatus_not_in: [ID!]
-  bookStatus_lt: ID
-  bookStatus_lte: ID
-  bookStatus_gt: ID
-  bookStatus_gte: ID
-  bookStatus_contains: ID
-  bookStatus_not_contains: ID
-  bookStatus_starts_with: ID
-  bookStatus_not_starts_with: ID
-  bookStatus_ends_with: ID
-  bookStatus_not_ends_with: ID
-  epochTime: ID
-  epochTime_not: ID
-  epochTime_in: [ID!]
-  epochTime_not_in: [ID!]
-  epochTime_lt: ID
-  epochTime_lte: ID
-  epochTime_gt: ID
-  epochTime_gte: ID
-  epochTime_contains: ID
-  epochTime_not_contains: ID
-  epochTime_starts_with: ID
-  epochTime_not_starts_with: ID
-  epochTime_ends_with: ID
-  epochTime_not_ends_with: ID
+  bookStatus: String
+  bookStatus_not: String
+  bookStatus_in: [String!]
+  bookStatus_not_in: [String!]
+  bookStatus_lt: String
+  bookStatus_lte: String
+  bookStatus_gt: String
+  bookStatus_gte: String
+  bookStatus_contains: String
+  bookStatus_not_contains: String
+  bookStatus_starts_with: String
+  bookStatus_not_starts_with: String
+  bookStatus_ends_with: String
+  bookStatus_not_ends_with: String
+  epochTime: String
+  epochTime_not: String
+  epochTime_in: [String!]
+  epochTime_not_in: [String!]
+  epochTime_lt: String
+  epochTime_lte: String
+  epochTime_gt: String
+  epochTime_gte: String
+  epochTime_contains: String
+  epochTime_not_contains: String
+  epochTime_starts_with: String
+  epochTime_not_starts_with: String
+  epochTime_ends_with: String
+  epochTime_not_ends_with: String
+  AND: [BookScalarWhereInput!]
+  OR: [BookScalarWhereInput!]
+  NOT: [BookScalarWhereInput!]
+}
+
+type BookSubscriptionPayload {
+  mutation: MutationType!
+  node: Book
+  updatedFields: [String!]
+  previousValues: BookPreviousValues
+}
+
+input BookSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: BookWhereInput
+  AND: [BookSubscriptionWhereInput!]
+  OR: [BookSubscriptionWhereInput!]
+  NOT: [BookSubscriptionWhereInput!]
+}
+
+input BookUpdateInput {
+  title: String
+  era: String
+  author: String
+  releaseDate: String
+  imageId: String
+  summary: String
+  pages: Int
+  isbn: Int
+  timeLine: String
+  series: String
+  bookStatus: String
+  epochTime: String
+  postedBy: UserUpdateOneWithoutBooksInput
+}
+
+input BookUpdateManyDataInput {
+  title: String
+  era: String
+  author: String
+  releaseDate: String
+  imageId: String
+  summary: String
+  pages: Int
+  isbn: Int
+  timeLine: String
+  series: String
+  bookStatus: String
+  epochTime: String
+}
+
+input BookUpdateManyMutationInput {
+  title: String
+  era: String
+  author: String
+  releaseDate: String
+  imageId: String
+  summary: String
+  pages: Int
+  isbn: Int
+  timeLine: String
+  series: String
+  bookStatus: String
+  epochTime: String
+}
+
+input BookUpdateManyWithoutPostedByInput {
+  create: [BookCreateWithoutPostedByInput!]
+  delete: [BookWhereUniqueInput!]
+  connect: [BookWhereUniqueInput!]
+  set: [BookWhereUniqueInput!]
+  disconnect: [BookWhereUniqueInput!]
+  update: [BookUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [BookUpsertWithWhereUniqueWithoutPostedByInput!]
+  deleteMany: [BookScalarWhereInput!]
+  updateMany: [BookUpdateManyWithWhereNestedInput!]
+}
+
+input BookUpdateManyWithWhereNestedInput {
+  where: BookScalarWhereInput!
+  data: BookUpdateManyDataInput!
+}
+
+input BookUpdateWithoutPostedByDataInput {
+  title: String
+  era: String
+  author: String
+  releaseDate: String
+  imageId: String
+  summary: String
+  pages: Int
+  isbn: Int
+  timeLine: String
+  series: String
+  bookStatus: String
+  epochTime: String
+}
+
+input BookUpdateWithWhereUniqueWithoutPostedByInput {
+  where: BookWhereUniqueInput!
+  data: BookUpdateWithoutPostedByDataInput!
+}
+
+input BookUpsertWithWhereUniqueWithoutPostedByInput {
+  where: BookWhereUniqueInput!
+  update: BookUpdateWithoutPostedByDataInput!
+  create: BookCreateWithoutPostedByInput!
+}
+
+input BookWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  dateAdded: DateTime
+  dateAdded_not: DateTime
+  dateAdded_in: [DateTime!]
+  dateAdded_not_in: [DateTime!]
+  dateAdded_lt: DateTime
+  dateAdded_lte: DateTime
+  dateAdded_gt: DateTime
+  dateAdded_gte: DateTime
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  era: String
+  era_not: String
+  era_in: [String!]
+  era_not_in: [String!]
+  era_lt: String
+  era_lte: String
+  era_gt: String
+  era_gte: String
+  era_contains: String
+  era_not_contains: String
+  era_starts_with: String
+  era_not_starts_with: String
+  era_ends_with: String
+  era_not_ends_with: String
+  author: String
+  author_not: String
+  author_in: [String!]
+  author_not_in: [String!]
+  author_lt: String
+  author_lte: String
+  author_gt: String
+  author_gte: String
+  author_contains: String
+  author_not_contains: String
+  author_starts_with: String
+  author_not_starts_with: String
+  author_ends_with: String
+  author_not_ends_with: String
+  releaseDate: String
+  releaseDate_not: String
+  releaseDate_in: [String!]
+  releaseDate_not_in: [String!]
+  releaseDate_lt: String
+  releaseDate_lte: String
+  releaseDate_gt: String
+  releaseDate_gte: String
+  releaseDate_contains: String
+  releaseDate_not_contains: String
+  releaseDate_starts_with: String
+  releaseDate_not_starts_with: String
+  releaseDate_ends_with: String
+  releaseDate_not_ends_with: String
+  imageId: String
+  imageId_not: String
+  imageId_in: [String!]
+  imageId_not_in: [String!]
+  imageId_lt: String
+  imageId_lte: String
+  imageId_gt: String
+  imageId_gte: String
+  imageId_contains: String
+  imageId_not_contains: String
+  imageId_starts_with: String
+  imageId_not_starts_with: String
+  imageId_ends_with: String
+  imageId_not_ends_with: String
+  summary: String
+  summary_not: String
+  summary_in: [String!]
+  summary_not_in: [String!]
+  summary_lt: String
+  summary_lte: String
+  summary_gt: String
+  summary_gte: String
+  summary_contains: String
+  summary_not_contains: String
+  summary_starts_with: String
+  summary_not_starts_with: String
+  summary_ends_with: String
+  summary_not_ends_with: String
+  pages: Int
+  pages_not: Int
+  pages_in: [Int!]
+  pages_not_in: [Int!]
+  pages_lt: Int
+  pages_lte: Int
+  pages_gt: Int
+  pages_gte: Int
+  isbn: Int
+  isbn_not: Int
+  isbn_in: [Int!]
+  isbn_not_in: [Int!]
+  isbn_lt: Int
+  isbn_lte: Int
+  isbn_gt: Int
+  isbn_gte: Int
+  timeLine: String
+  timeLine_not: String
+  timeLine_in: [String!]
+  timeLine_not_in: [String!]
+  timeLine_lt: String
+  timeLine_lte: String
+  timeLine_gt: String
+  timeLine_gte: String
+  timeLine_contains: String
+  timeLine_not_contains: String
+  timeLine_starts_with: String
+  timeLine_not_starts_with: String
+  timeLine_ends_with: String
+  timeLine_not_ends_with: String
+  series: String
+  series_not: String
+  series_in: [String!]
+  series_not_in: [String!]
+  series_lt: String
+  series_lte: String
+  series_gt: String
+  series_gte: String
+  series_contains: String
+  series_not_contains: String
+  series_starts_with: String
+  series_not_starts_with: String
+  series_ends_with: String
+  series_not_ends_with: String
+  bookStatus: String
+  bookStatus_not: String
+  bookStatus_in: [String!]
+  bookStatus_not_in: [String!]
+  bookStatus_lt: String
+  bookStatus_lte: String
+  bookStatus_gt: String
+  bookStatus_gte: String
+  bookStatus_contains: String
+  bookStatus_not_contains: String
+  bookStatus_starts_with: String
+  bookStatus_not_starts_with: String
+  bookStatus_ends_with: String
+  bookStatus_not_ends_with: String
+  epochTime: String
+  epochTime_not: String
+  epochTime_in: [String!]
+  epochTime_not_in: [String!]
+  epochTime_lt: String
+  epochTime_lte: String
+  epochTime_gt: String
+  epochTime_gte: String
+  epochTime_contains: String
+  epochTime_not_contains: String
+  epochTime_starts_with: String
+  epochTime_not_starts_with: String
+  epochTime_ends_with: String
+  epochTime_not_ends_with: String
+  postedBy: UserWhereInput
   AND: [BookWhereInput!]
   OR: [BookWhereInput!]
   NOT: [BookWhereInput!]
@@ -579,263 +612,21 @@ input BookWhereUniqueInput {
 
 scalar DateTime
 
-type EpochTime {
-  id: ID!
-  dateAdded: DateTime!
-  name: String!
-}
-
-type EpochTimeConnection {
-  pageInfo: PageInfo!
-  edges: [EpochTimeEdge]!
-  aggregate: AggregateEpochTime!
-}
-
-input EpochTimeCreateInput {
-  id: ID
-  name: String!
-}
-
-type EpochTimeEdge {
-  node: EpochTime!
-  cursor: String!
-}
-
-enum EpochTimeOrderByInput {
-  id_ASC
-  id_DESC
-  dateAdded_ASC
-  dateAdded_DESC
-  name_ASC
-  name_DESC
-}
-
-type EpochTimePreviousValues {
-  id: ID!
-  dateAdded: DateTime!
-  name: String!
-}
-
-type EpochTimeSubscriptionPayload {
-  mutation: MutationType!
-  node: EpochTime
-  updatedFields: [String!]
-  previousValues: EpochTimePreviousValues
-}
-
-input EpochTimeSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: EpochTimeWhereInput
-  AND: [EpochTimeSubscriptionWhereInput!]
-  OR: [EpochTimeSubscriptionWhereInput!]
-  NOT: [EpochTimeSubscriptionWhereInput!]
-}
-
-input EpochTimeUpdateInput {
-  name: String
-}
-
-input EpochTimeUpdateManyMutationInput {
-  name: String
-}
-
-input EpochTimeWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  dateAdded: DateTime
-  dateAdded_not: DateTime
-  dateAdded_in: [DateTime!]
-  dateAdded_not_in: [DateTime!]
-  dateAdded_lt: DateTime
-  dateAdded_lte: DateTime
-  dateAdded_gt: DateTime
-  dateAdded_gte: DateTime
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  AND: [EpochTimeWhereInput!]
-  OR: [EpochTimeWhereInput!]
-  NOT: [EpochTimeWhereInput!]
-}
-
-input EpochTimeWhereUniqueInput {
-  id: ID
-}
-
-type Era {
-  id: ID!
-  dateAdded: DateTime!
-  name: String!
-}
-
-type EraConnection {
-  pageInfo: PageInfo!
-  edges: [EraEdge]!
-  aggregate: AggregateEra!
-}
-
-input EraCreateInput {
-  id: ID
-  name: String!
-}
-
-type EraEdge {
-  node: Era!
-  cursor: String!
-}
-
-enum EraOrderByInput {
-  id_ASC
-  id_DESC
-  dateAdded_ASC
-  dateAdded_DESC
-  name_ASC
-  name_DESC
-}
-
-type EraPreviousValues {
-  id: ID!
-  dateAdded: DateTime!
-  name: String!
-}
-
-type EraSubscriptionPayload {
-  mutation: MutationType!
-  node: Era
-  updatedFields: [String!]
-  previousValues: EraPreviousValues
-}
-
-input EraSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: EraWhereInput
-  AND: [EraSubscriptionWhereInput!]
-  OR: [EraSubscriptionWhereInput!]
-  NOT: [EraSubscriptionWhereInput!]
-}
-
-input EraUpdateInput {
-  name: String
-}
-
-input EraUpdateManyMutationInput {
-  name: String
-}
-
-input EraWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  dateAdded: DateTime
-  dateAdded_not: DateTime
-  dateAdded_in: [DateTime!]
-  dateAdded_not_in: [DateTime!]
-  dateAdded_lt: DateTime
-  dateAdded_lte: DateTime
-  dateAdded_gt: DateTime
-  dateAdded_gte: DateTime
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  AND: [EraWhereInput!]
-  OR: [EraWhereInput!]
-  NOT: [EraWhereInput!]
-}
-
-input EraWhereUniqueInput {
-  id: ID
-}
-
 scalar Long
 
 type Mutation {
-  createAuthor(data: AuthorCreateInput!): Author!
-  updateAuthor(data: AuthorUpdateInput!, where: AuthorWhereUniqueInput!): Author
-  updateManyAuthors(data: AuthorUpdateManyMutationInput!, where: AuthorWhereInput): BatchPayload!
-  upsertAuthor(where: AuthorWhereUniqueInput!, create: AuthorCreateInput!, update: AuthorUpdateInput!): Author!
-  deleteAuthor(where: AuthorWhereUniqueInput!): Author
-  deleteManyAuthors(where: AuthorWhereInput): BatchPayload!
   createBook(data: BookCreateInput!): Book!
   updateBook(data: BookUpdateInput!, where: BookWhereUniqueInput!): Book
   updateManyBooks(data: BookUpdateManyMutationInput!, where: BookWhereInput): BatchPayload!
   upsertBook(where: BookWhereUniqueInput!, create: BookCreateInput!, update: BookUpdateInput!): Book!
   deleteBook(where: BookWhereUniqueInput!): Book
   deleteManyBooks(where: BookWhereInput): BatchPayload!
-  createBookStatus(data: BookStatusCreateInput!): BookStatus!
-  updateBookStatus(data: BookStatusUpdateInput!, where: BookStatusWhereUniqueInput!): BookStatus
-  updateManyBookStatuses(data: BookStatusUpdateManyMutationInput!, where: BookStatusWhereInput): BatchPayload!
-  upsertBookStatus(where: BookStatusWhereUniqueInput!, create: BookStatusCreateInput!, update: BookStatusUpdateInput!): BookStatus!
-  deleteBookStatus(where: BookStatusWhereUniqueInput!): BookStatus
-  deleteManyBookStatuses(where: BookStatusWhereInput): BatchPayload!
-  createEpochTime(data: EpochTimeCreateInput!): EpochTime!
-  updateEpochTime(data: EpochTimeUpdateInput!, where: EpochTimeWhereUniqueInput!): EpochTime
-  updateManyEpochTimes(data: EpochTimeUpdateManyMutationInput!, where: EpochTimeWhereInput): BatchPayload!
-  upsertEpochTime(where: EpochTimeWhereUniqueInput!, create: EpochTimeCreateInput!, update: EpochTimeUpdateInput!): EpochTime!
-  deleteEpochTime(where: EpochTimeWhereUniqueInput!): EpochTime
-  deleteManyEpochTimes(where: EpochTimeWhereInput): BatchPayload!
-  createEra(data: EraCreateInput!): Era!
-  updateEra(data: EraUpdateInput!, where: EraWhereUniqueInput!): Era
-  updateManyEras(data: EraUpdateManyMutationInput!, where: EraWhereInput): BatchPayload!
-  upsertEra(where: EraWhereUniqueInput!, create: EraCreateInput!, update: EraUpdateInput!): Era!
-  deleteEra(where: EraWhereUniqueInput!): Era
-  deleteManyEras(where: EraWhereInput): BatchPayload!
-  createSeries(data: SeriesCreateInput!): Series!
-  updateSeries(data: SeriesUpdateInput!, where: SeriesWhereUniqueInput!): Series
-  updateManySerieses(data: SeriesUpdateManyMutationInput!, where: SeriesWhereInput): BatchPayload!
-  upsertSeries(where: SeriesWhereUniqueInput!, create: SeriesCreateInput!, update: SeriesUpdateInput!): Series!
-  deleteSeries(where: SeriesWhereUniqueInput!): Series
-  deleteManySerieses(where: SeriesWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -856,91 +647,120 @@ type PageInfo {
 }
 
 type Query {
-  author(where: AuthorWhereUniqueInput!): Author
-  authors(where: AuthorWhereInput, orderBy: AuthorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Author]!
-  authorsConnection(where: AuthorWhereInput, orderBy: AuthorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AuthorConnection!
   book(where: BookWhereUniqueInput!): Book
   books(where: BookWhereInput, orderBy: BookOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Book]!
   booksConnection(where: BookWhereInput, orderBy: BookOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BookConnection!
-  bookStatus(where: BookStatusWhereUniqueInput!): BookStatus
-  bookStatuses(where: BookStatusWhereInput, orderBy: BookStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BookStatus]!
-  bookStatusesConnection(where: BookStatusWhereInput, orderBy: BookStatusOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BookStatusConnection!
-  epochTime(where: EpochTimeWhereUniqueInput!): EpochTime
-  epochTimes(where: EpochTimeWhereInput, orderBy: EpochTimeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EpochTime]!
-  epochTimesConnection(where: EpochTimeWhereInput, orderBy: EpochTimeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EpochTimeConnection!
-  era(where: EraWhereUniqueInput!): Era
-  eras(where: EraWhereInput, orderBy: EraOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Era]!
-  erasConnection(where: EraWhereInput, orderBy: EraOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EraConnection!
-  series(where: SeriesWhereUniqueInput!): Series
-  serieses(where: SeriesWhereInput, orderBy: SeriesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Series]!
-  seriesesConnection(where: SeriesWhereInput, orderBy: SeriesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SeriesConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   node(id: ID!): Node
 }
 
-type Series {
+type Subscription {
+  book(where: BookSubscriptionWhereInput): BookSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User {
   id: ID!
-  dateAdded: DateTime!
   name: String!
+  password: String!
+  books(where: BookWhereInput, orderBy: BookOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Book!]
 }
 
-type SeriesConnection {
+type UserConnection {
   pageInfo: PageInfo!
-  edges: [SeriesEdge]!
-  aggregate: AggregateSeries!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
 }
 
-input SeriesCreateInput {
+input UserCreateInput {
   id: ID
   name: String!
+  password: String!
+  books: BookCreateManyWithoutPostedByInput
 }
 
-type SeriesEdge {
-  node: Series!
+input UserCreateOneWithoutBooksInput {
+  create: UserCreateWithoutBooksInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutBooksInput {
+  id: ID
+  name: String!
+  password: String!
+}
+
+type UserEdge {
+  node: User!
   cursor: String!
 }
 
-enum SeriesOrderByInput {
+enum UserOrderByInput {
   id_ASC
   id_DESC
-  dateAdded_ASC
-  dateAdded_DESC
   name_ASC
   name_DESC
+  password_ASC
+  password_DESC
 }
 
-type SeriesPreviousValues {
+type UserPreviousValues {
   id: ID!
-  dateAdded: DateTime!
   name: String!
+  password: String!
 }
 
-type SeriesSubscriptionPayload {
+type UserSubscriptionPayload {
   mutation: MutationType!
-  node: Series
+  node: User
   updatedFields: [String!]
-  previousValues: SeriesPreviousValues
+  previousValues: UserPreviousValues
 }
 
-input SeriesSubscriptionWhereInput {
+input UserSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: SeriesWhereInput
-  AND: [SeriesSubscriptionWhereInput!]
-  OR: [SeriesSubscriptionWhereInput!]
-  NOT: [SeriesSubscriptionWhereInput!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
 }
 
-input SeriesUpdateInput {
+input UserUpdateInput {
   name: String
+  password: String
+  books: BookUpdateManyWithoutPostedByInput
 }
 
-input SeriesUpdateManyMutationInput {
+input UserUpdateManyMutationInput {
   name: String
+  password: String
 }
 
-input SeriesWhereInput {
+input UserUpdateOneWithoutBooksInput {
+  create: UserCreateWithoutBooksInput
+  update: UserUpdateWithoutBooksDataInput
+  upsert: UserUpsertWithoutBooksInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutBooksDataInput {
+  name: String
+  password: String
+}
+
+input UserUpsertWithoutBooksInput {
+  update: UserUpdateWithoutBooksDataInput!
+  create: UserCreateWithoutBooksInput!
+}
+
+input UserWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -955,14 +775,6 @@ input SeriesWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  dateAdded: DateTime
-  dateAdded_not: DateTime
-  dateAdded_in: [DateTime!]
-  dateAdded_not_in: [DateTime!]
-  dateAdded_lt: DateTime
-  dateAdded_lte: DateTime
-  dateAdded_gt: DateTime
-  dateAdded_gte: DateTime
   name: String
   name_not: String
   name_in: [String!]
@@ -977,22 +789,31 @@ input SeriesWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  AND: [SeriesWhereInput!]
-  OR: [SeriesWhereInput!]
-  NOT: [SeriesWhereInput!]
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  books_every: BookWhereInput
+  books_some: BookWhereInput
+  books_none: BookWhereInput
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
 }
 
-input SeriesWhereUniqueInput {
+input UserWhereUniqueInput {
   id: ID
-}
-
-type Subscription {
-  author(where: AuthorSubscriptionWhereInput): AuthorSubscriptionPayload
-  book(where: BookSubscriptionWhereInput): BookSubscriptionPayload
-  bookStatus(where: BookStatusSubscriptionWhereInput): BookStatusSubscriptionPayload
-  epochTime(where: EpochTimeSubscriptionWhereInput): EpochTimeSubscriptionPayload
-  era(where: EraSubscriptionWhereInput): EraSubscriptionPayload
-  series(where: SeriesSubscriptionWhereInput): SeriesSubscriptionPayload
+  name: String
 }
 `
       }

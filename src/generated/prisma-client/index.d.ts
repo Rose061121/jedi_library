@@ -16,12 +16,8 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  author: (where?: AuthorWhereInput) => Promise<boolean>;
   book: (where?: BookWhereInput) => Promise<boolean>;
-  bookStatus: (where?: BookStatusWhereInput) => Promise<boolean>;
-  epochTime: (where?: EpochTimeWhereInput) => Promise<boolean>;
-  era: (where?: EraWhereInput) => Promise<boolean>;
-  series: (where?: SeriesWhereInput) => Promise<boolean>;
+  user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
 export interface Node {}
@@ -43,25 +39,6 @@ export interface Prisma {
    * Queries
    */
 
-  author: (where: AuthorWhereUniqueInput) => AuthorNullablePromise;
-  authors: (args?: {
-    where?: AuthorWhereInput;
-    orderBy?: AuthorOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<Author>;
-  authorsConnection: (args?: {
-    where?: AuthorWhereInput;
-    orderBy?: AuthorOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => AuthorConnectionPromise;
   book: (where: BookWhereUniqueInput) => BookNullablePromise;
   books: (args?: {
     where?: BookWhereInput;
@@ -81,104 +58,31 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => BookConnectionPromise;
-  bookStatus: (where: BookStatusWhereUniqueInput) => BookStatusNullablePromise;
-  bookStatuses: (args?: {
-    where?: BookStatusWhereInput;
-    orderBy?: BookStatusOrderByInput;
+  user: (where: UserWhereUniqueInput) => UserNullablePromise;
+  users: (args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<BookStatus>;
-  bookStatusesConnection: (args?: {
-    where?: BookStatusWhereInput;
-    orderBy?: BookStatusOrderByInput;
+  }) => FragmentableArray<User>;
+  usersConnection: (args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => BookStatusConnectionPromise;
-  epochTime: (where: EpochTimeWhereUniqueInput) => EpochTimeNullablePromise;
-  epochTimes: (args?: {
-    where?: EpochTimeWhereInput;
-    orderBy?: EpochTimeOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<EpochTime>;
-  epochTimesConnection: (args?: {
-    where?: EpochTimeWhereInput;
-    orderBy?: EpochTimeOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => EpochTimeConnectionPromise;
-  era: (where: EraWhereUniqueInput) => EraNullablePromise;
-  eras: (args?: {
-    where?: EraWhereInput;
-    orderBy?: EraOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<Era>;
-  erasConnection: (args?: {
-    where?: EraWhereInput;
-    orderBy?: EraOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => EraConnectionPromise;
-  series: (where: SeriesWhereUniqueInput) => SeriesNullablePromise;
-  serieses: (args?: {
-    where?: SeriesWhereInput;
-    orderBy?: SeriesOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<Series>;
-  seriesesConnection: (args?: {
-    where?: SeriesWhereInput;
-    orderBy?: SeriesOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => SeriesConnectionPromise;
+  }) => UserConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
    * Mutations
    */
 
-  createAuthor: (data: AuthorCreateInput) => AuthorPromise;
-  updateAuthor: (args: {
-    data: AuthorUpdateInput;
-    where: AuthorWhereUniqueInput;
-  }) => AuthorPromise;
-  updateManyAuthors: (args: {
-    data: AuthorUpdateManyMutationInput;
-    where?: AuthorWhereInput;
-  }) => BatchPayloadPromise;
-  upsertAuthor: (args: {
-    where: AuthorWhereUniqueInput;
-    create: AuthorCreateInput;
-    update: AuthorUpdateInput;
-  }) => AuthorPromise;
-  deleteAuthor: (where: AuthorWhereUniqueInput) => AuthorPromise;
-  deleteManyAuthors: (where?: AuthorWhereInput) => BatchPayloadPromise;
   createBook: (data: BookCreateInput) => BookPromise;
   updateBook: (args: {
     data: BookUpdateInput;
@@ -195,70 +99,22 @@ export interface Prisma {
   }) => BookPromise;
   deleteBook: (where: BookWhereUniqueInput) => BookPromise;
   deleteManyBooks: (where?: BookWhereInput) => BatchPayloadPromise;
-  createBookStatus: (data: BookStatusCreateInput) => BookStatusPromise;
-  updateBookStatus: (args: {
-    data: BookStatusUpdateInput;
-    where: BookStatusWhereUniqueInput;
-  }) => BookStatusPromise;
-  updateManyBookStatuses: (args: {
-    data: BookStatusUpdateManyMutationInput;
-    where?: BookStatusWhereInput;
+  createUser: (data: UserCreateInput) => UserPromise;
+  updateUser: (args: {
+    data: UserUpdateInput;
+    where: UserWhereUniqueInput;
+  }) => UserPromise;
+  updateManyUsers: (args: {
+    data: UserUpdateManyMutationInput;
+    where?: UserWhereInput;
   }) => BatchPayloadPromise;
-  upsertBookStatus: (args: {
-    where: BookStatusWhereUniqueInput;
-    create: BookStatusCreateInput;
-    update: BookStatusUpdateInput;
-  }) => BookStatusPromise;
-  deleteBookStatus: (where: BookStatusWhereUniqueInput) => BookStatusPromise;
-  deleteManyBookStatuses: (where?: BookStatusWhereInput) => BatchPayloadPromise;
-  createEpochTime: (data: EpochTimeCreateInput) => EpochTimePromise;
-  updateEpochTime: (args: {
-    data: EpochTimeUpdateInput;
-    where: EpochTimeWhereUniqueInput;
-  }) => EpochTimePromise;
-  updateManyEpochTimes: (args: {
-    data: EpochTimeUpdateManyMutationInput;
-    where?: EpochTimeWhereInput;
-  }) => BatchPayloadPromise;
-  upsertEpochTime: (args: {
-    where: EpochTimeWhereUniqueInput;
-    create: EpochTimeCreateInput;
-    update: EpochTimeUpdateInput;
-  }) => EpochTimePromise;
-  deleteEpochTime: (where: EpochTimeWhereUniqueInput) => EpochTimePromise;
-  deleteManyEpochTimes: (where?: EpochTimeWhereInput) => BatchPayloadPromise;
-  createEra: (data: EraCreateInput) => EraPromise;
-  updateEra: (args: {
-    data: EraUpdateInput;
-    where: EraWhereUniqueInput;
-  }) => EraPromise;
-  updateManyEras: (args: {
-    data: EraUpdateManyMutationInput;
-    where?: EraWhereInput;
-  }) => BatchPayloadPromise;
-  upsertEra: (args: {
-    where: EraWhereUniqueInput;
-    create: EraCreateInput;
-    update: EraUpdateInput;
-  }) => EraPromise;
-  deleteEra: (where: EraWhereUniqueInput) => EraPromise;
-  deleteManyEras: (where?: EraWhereInput) => BatchPayloadPromise;
-  createSeries: (data: SeriesCreateInput) => SeriesPromise;
-  updateSeries: (args: {
-    data: SeriesUpdateInput;
-    where: SeriesWhereUniqueInput;
-  }) => SeriesPromise;
-  updateManySerieses: (args: {
-    data: SeriesUpdateManyMutationInput;
-    where?: SeriesWhereInput;
-  }) => BatchPayloadPromise;
-  upsertSeries: (args: {
-    where: SeriesWhereUniqueInput;
-    create: SeriesCreateInput;
-    update: SeriesUpdateInput;
-  }) => SeriesPromise;
-  deleteSeries: (where: SeriesWhereUniqueInput) => SeriesPromise;
-  deleteManySerieses: (where?: SeriesWhereInput) => BatchPayloadPromise;
+  upsertUser: (args: {
+    where: UserWhereUniqueInput;
+    create: UserCreateInput;
+    update: UserUpdateInput;
+  }) => UserPromise;
+  deleteUser: (where: UserWhereUniqueInput) => UserPromise;
+  deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
 
   /**
    * Subscriptions
@@ -268,24 +124,12 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  author: (
-    where?: AuthorSubscriptionWhereInput
-  ) => AuthorSubscriptionPayloadSubscription;
   book: (
     where?: BookSubscriptionWhereInput
   ) => BookSubscriptionPayloadSubscription;
-  bookStatus: (
-    where?: BookStatusSubscriptionWhereInput
-  ) => BookStatusSubscriptionPayloadSubscription;
-  epochTime: (
-    where?: EpochTimeSubscriptionWhereInput
-  ) => EpochTimeSubscriptionPayloadSubscription;
-  era: (
-    where?: EraSubscriptionWhereInput
-  ) => EraSubscriptionPayloadSubscription;
-  series: (
-    where?: SeriesSubscriptionWhereInput
-  ) => SeriesSubscriptionPayloadSubscription;
+  user: (
+    where?: UserSubscriptionWhereInput
+  ) => UserSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -326,77 +170,69 @@ export type BookOrderByInput =
   | "epochTime_ASC"
   | "epochTime_DESC";
 
-export type AuthorOrderByInput =
+export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "dateAdded_ASC"
-  | "dateAdded_DESC"
   | "name_ASC"
-  | "name_DESC";
-
-export type BookStatusOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "dateAdded_ASC"
-  | "dateAdded_DESC"
-  | "name_ASC"
-  | "name_DESC";
-
-export type EpochTimeOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "dateAdded_ASC"
-  | "dateAdded_DESC"
-  | "name_ASC"
-  | "name_DESC";
-
-export type EraOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "dateAdded_ASC"
-  | "dateAdded_DESC"
-  | "name_ASC"
-  | "name_DESC";
+  | "name_DESC"
+  | "password_ASC"
+  | "password_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type SeriesOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "dateAdded_ASC"
-  | "dateAdded_DESC"
-  | "name_ASC"
-  | "name_DESC";
+export interface UserUpdateOneWithoutBooksInput {
+  create?: Maybe<UserCreateWithoutBooksInput>;
+  update?: Maybe<UserUpdateWithoutBooksDataInput>;
+  upsert?: Maybe<UserUpsertWithoutBooksInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
 
-export type AuthorWhereUniqueInput = AtLeastOne<{
+export type BookWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export type EpochTimeWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface BookUpdateWithWhereUniqueWithoutPostedByInput {
+  where: BookWhereUniqueInput;
+  data: BookUpdateWithoutPostedByDataInput;
+}
 
-export interface AuthorCreateInput {
+export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   name: String;
+  password: String;
+  books?: Maybe<BookCreateManyWithoutPostedByInput>;
 }
 
-export interface EpochTimeUpdateManyMutationInput {
-  name?: Maybe<String>;
+export interface BookUpdateManyWithoutPostedByInput {
+  create?: Maybe<
+    BookCreateWithoutPostedByInput[] | BookCreateWithoutPostedByInput
+  >;
+  delete?: Maybe<BookWhereUniqueInput[] | BookWhereUniqueInput>;
+  connect?: Maybe<BookWhereUniqueInput[] | BookWhereUniqueInput>;
+  set?: Maybe<BookWhereUniqueInput[] | BookWhereUniqueInput>;
+  disconnect?: Maybe<BookWhereUniqueInput[] | BookWhereUniqueInput>;
+  update?: Maybe<
+    | BookUpdateWithWhereUniqueWithoutPostedByInput[]
+    | BookUpdateWithWhereUniqueWithoutPostedByInput
+  >;
+  upsert?: Maybe<
+    | BookUpsertWithWhereUniqueWithoutPostedByInput[]
+    | BookUpsertWithWhereUniqueWithoutPostedByInput
+  >;
+  deleteMany?: Maybe<BookScalarWhereInput[] | BookScalarWhereInput>;
+  updateMany?: Maybe<
+    BookUpdateManyWithWhereNestedInput[] | BookUpdateManyWithWhereNestedInput
+  >;
 }
 
-export interface EraSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<EraWhereInput>;
-  AND?: Maybe<EraSubscriptionWhereInput[] | EraSubscriptionWhereInput>;
-  OR?: Maybe<EraSubscriptionWhereInput[] | EraSubscriptionWhereInput>;
-  NOT?: Maybe<EraSubscriptionWhereInput[] | EraSubscriptionWhereInput>;
+export interface UserUpsertWithoutBooksInput {
+  update: UserUpdateWithoutBooksDataInput;
+  create: UserCreateWithoutBooksInput;
 }
 
-export interface EpochTimeWhereInput {
+export interface UserWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -411,14 +247,6 @@ export interface EpochTimeWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  dateAdded?: Maybe<DateTimeInput>;
-  dateAdded_not?: Maybe<DateTimeInput>;
-  dateAdded_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  dateAdded_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  dateAdded_lt?: Maybe<DateTimeInput>;
-  dateAdded_lte?: Maybe<DateTimeInput>;
-  dateAdded_gt?: Maybe<DateTimeInput>;
-  dateAdded_gte?: Maybe<DateTimeInput>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -433,20 +261,77 @@ export interface EpochTimeWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<EpochTimeWhereInput[] | EpochTimeWhereInput>;
-  OR?: Maybe<EpochTimeWhereInput[] | EpochTimeWhereInput>;
-  NOT?: Maybe<EpochTimeWhereInput[] | EpochTimeWhereInput>;
+  password?: Maybe<String>;
+  password_not?: Maybe<String>;
+  password_in?: Maybe<String[] | String>;
+  password_not_in?: Maybe<String[] | String>;
+  password_lt?: Maybe<String>;
+  password_lte?: Maybe<String>;
+  password_gt?: Maybe<String>;
+  password_gte?: Maybe<String>;
+  password_contains?: Maybe<String>;
+  password_not_contains?: Maybe<String>;
+  password_starts_with?: Maybe<String>;
+  password_not_starts_with?: Maybe<String>;
+  password_ends_with?: Maybe<String>;
+  password_not_ends_with?: Maybe<String>;
+  books_every?: Maybe<BookWhereInput>;
+  books_some?: Maybe<BookWhereInput>;
+  books_none?: Maybe<BookWhereInput>;
+  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
+  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
+  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export type BookWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface EpochTimeUpdateInput {
-  name?: Maybe<String>;
+export interface BookSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<BookWhereInput>;
+  AND?: Maybe<BookSubscriptionWhereInput[] | BookSubscriptionWhereInput>;
+  OR?: Maybe<BookSubscriptionWhereInput[] | BookSubscriptionWhereInput>;
+  NOT?: Maybe<BookSubscriptionWhereInput[] | BookSubscriptionWhereInput>;
 }
 
-export interface BookWhereInput {
+export interface BookCreateInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+  era: String;
+  author: String;
+  releaseDate: String;
+  imageId: String;
+  summary: String;
+  pages: Int;
+  isbn: Int;
+  timeLine: String;
+  series?: Maybe<String>;
+  bookStatus: String;
+  epochTime: String;
+  postedBy?: Maybe<UserCreateOneWithoutBooksInput>;
+}
+
+export interface BookUpdateManyDataInput {
+  title?: Maybe<String>;
+  era?: Maybe<String>;
+  author?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  imageId?: Maybe<String>;
+  summary?: Maybe<String>;
+  pages?: Maybe<Int>;
+  isbn?: Maybe<Int>;
+  timeLine?: Maybe<String>;
+  series?: Maybe<String>;
+  bookStatus?: Maybe<String>;
+  epochTime?: Maybe<String>;
+}
+
+export interface UserCreateOneWithoutBooksInput {
+  create?: Maybe<UserCreateWithoutBooksInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface BookScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -497,20 +382,20 @@ export interface BookWhereInput {
   era_not_starts_with?: Maybe<String>;
   era_ends_with?: Maybe<String>;
   era_not_ends_with?: Maybe<String>;
-  author?: Maybe<ID_Input>;
-  author_not?: Maybe<ID_Input>;
-  author_in?: Maybe<ID_Input[] | ID_Input>;
-  author_not_in?: Maybe<ID_Input[] | ID_Input>;
-  author_lt?: Maybe<ID_Input>;
-  author_lte?: Maybe<ID_Input>;
-  author_gt?: Maybe<ID_Input>;
-  author_gte?: Maybe<ID_Input>;
-  author_contains?: Maybe<ID_Input>;
-  author_not_contains?: Maybe<ID_Input>;
-  author_starts_with?: Maybe<ID_Input>;
-  author_not_starts_with?: Maybe<ID_Input>;
-  author_ends_with?: Maybe<ID_Input>;
-  author_not_ends_with?: Maybe<ID_Input>;
+  author?: Maybe<String>;
+  author_not?: Maybe<String>;
+  author_in?: Maybe<String[] | String>;
+  author_not_in?: Maybe<String[] | String>;
+  author_lt?: Maybe<String>;
+  author_lte?: Maybe<String>;
+  author_gt?: Maybe<String>;
+  author_gte?: Maybe<String>;
+  author_contains?: Maybe<String>;
+  author_not_contains?: Maybe<String>;
+  author_starts_with?: Maybe<String>;
+  author_not_starts_with?: Maybe<String>;
+  author_ends_with?: Maybe<String>;
+  author_not_ends_with?: Maybe<String>;
   releaseDate?: Maybe<String>;
   releaseDate_not?: Maybe<String>;
   releaseDate_in?: Maybe<String[] | String>;
@@ -597,216 +482,55 @@ export interface BookWhereInput {
   series_not_starts_with?: Maybe<String>;
   series_ends_with?: Maybe<String>;
   series_not_ends_with?: Maybe<String>;
-  bookStatus?: Maybe<ID_Input>;
-  bookStatus_not?: Maybe<ID_Input>;
-  bookStatus_in?: Maybe<ID_Input[] | ID_Input>;
-  bookStatus_not_in?: Maybe<ID_Input[] | ID_Input>;
-  bookStatus_lt?: Maybe<ID_Input>;
-  bookStatus_lte?: Maybe<ID_Input>;
-  bookStatus_gt?: Maybe<ID_Input>;
-  bookStatus_gte?: Maybe<ID_Input>;
-  bookStatus_contains?: Maybe<ID_Input>;
-  bookStatus_not_contains?: Maybe<ID_Input>;
-  bookStatus_starts_with?: Maybe<ID_Input>;
-  bookStatus_not_starts_with?: Maybe<ID_Input>;
-  bookStatus_ends_with?: Maybe<ID_Input>;
-  bookStatus_not_ends_with?: Maybe<ID_Input>;
-  epochTime?: Maybe<ID_Input>;
-  epochTime_not?: Maybe<ID_Input>;
-  epochTime_in?: Maybe<ID_Input[] | ID_Input>;
-  epochTime_not_in?: Maybe<ID_Input[] | ID_Input>;
-  epochTime_lt?: Maybe<ID_Input>;
-  epochTime_lte?: Maybe<ID_Input>;
-  epochTime_gt?: Maybe<ID_Input>;
-  epochTime_gte?: Maybe<ID_Input>;
-  epochTime_contains?: Maybe<ID_Input>;
-  epochTime_not_contains?: Maybe<ID_Input>;
-  epochTime_starts_with?: Maybe<ID_Input>;
-  epochTime_not_starts_with?: Maybe<ID_Input>;
-  epochTime_ends_with?: Maybe<ID_Input>;
-  epochTime_not_ends_with?: Maybe<ID_Input>;
-  AND?: Maybe<BookWhereInput[] | BookWhereInput>;
-  OR?: Maybe<BookWhereInput[] | BookWhereInput>;
-  NOT?: Maybe<BookWhereInput[] | BookWhereInput>;
+  bookStatus?: Maybe<String>;
+  bookStatus_not?: Maybe<String>;
+  bookStatus_in?: Maybe<String[] | String>;
+  bookStatus_not_in?: Maybe<String[] | String>;
+  bookStatus_lt?: Maybe<String>;
+  bookStatus_lte?: Maybe<String>;
+  bookStatus_gt?: Maybe<String>;
+  bookStatus_gte?: Maybe<String>;
+  bookStatus_contains?: Maybe<String>;
+  bookStatus_not_contains?: Maybe<String>;
+  bookStatus_starts_with?: Maybe<String>;
+  bookStatus_not_starts_with?: Maybe<String>;
+  bookStatus_ends_with?: Maybe<String>;
+  bookStatus_not_ends_with?: Maybe<String>;
+  epochTime?: Maybe<String>;
+  epochTime_not?: Maybe<String>;
+  epochTime_in?: Maybe<String[] | String>;
+  epochTime_not_in?: Maybe<String[] | String>;
+  epochTime_lt?: Maybe<String>;
+  epochTime_lte?: Maybe<String>;
+  epochTime_gt?: Maybe<String>;
+  epochTime_gte?: Maybe<String>;
+  epochTime_contains?: Maybe<String>;
+  epochTime_not_contains?: Maybe<String>;
+  epochTime_starts_with?: Maybe<String>;
+  epochTime_not_starts_with?: Maybe<String>;
+  epochTime_ends_with?: Maybe<String>;
+  epochTime_not_ends_with?: Maybe<String>;
+  AND?: Maybe<BookScalarWhereInput[] | BookScalarWhereInput>;
+  OR?: Maybe<BookScalarWhereInput[] | BookScalarWhereInput>;
+  NOT?: Maybe<BookScalarWhereInput[] | BookScalarWhereInput>;
 }
 
-export interface EpochTimeCreateInput {
+export interface UserCreateWithoutBooksInput {
   id?: Maybe<ID_Input>;
   name: String;
+  password: String;
 }
 
-export interface AuthorSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<AuthorWhereInput>;
-  AND?: Maybe<AuthorSubscriptionWhereInput[] | AuthorSubscriptionWhereInput>;
-  OR?: Maybe<AuthorSubscriptionWhereInput[] | AuthorSubscriptionWhereInput>;
-  NOT?: Maybe<AuthorSubscriptionWhereInput[] | AuthorSubscriptionWhereInput>;
-}
-
-export interface BookStatusUpdateManyMutationInput {
-  name?: Maybe<String>;
-}
-
-export interface SeriesUpdateInput {
-  name?: Maybe<String>;
-}
-
-export interface BookStatusUpdateInput {
-  name?: Maybe<String>;
-}
-
-export interface SeriesCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-}
-
-export type EraWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface AuthorWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  dateAdded?: Maybe<DateTimeInput>;
-  dateAdded_not?: Maybe<DateTimeInput>;
-  dateAdded_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  dateAdded_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  dateAdded_lt?: Maybe<DateTimeInput>;
-  dateAdded_lte?: Maybe<DateTimeInput>;
-  dateAdded_gt?: Maybe<DateTimeInput>;
-  dateAdded_gte?: Maybe<DateTimeInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<AuthorWhereInput[] | AuthorWhereInput>;
-  OR?: Maybe<AuthorWhereInput[] | AuthorWhereInput>;
-  NOT?: Maybe<AuthorWhereInput[] | AuthorWhereInput>;
-}
-
-export interface BookStatusCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-}
-
-export interface EraUpdateInput {
-  name?: Maybe<String>;
-}
-
-export interface EraWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  dateAdded?: Maybe<DateTimeInput>;
-  dateAdded_not?: Maybe<DateTimeInput>;
-  dateAdded_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  dateAdded_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  dateAdded_lt?: Maybe<DateTimeInput>;
-  dateAdded_lte?: Maybe<DateTimeInput>;
-  dateAdded_gt?: Maybe<DateTimeInput>;
-  dateAdded_gte?: Maybe<DateTimeInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<EraWhereInput[] | EraWhereInput>;
-  OR?: Maybe<EraWhereInput[] | EraWhereInput>;
-  NOT?: Maybe<EraWhereInput[] | EraWhereInput>;
-}
-
-export interface SeriesSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<SeriesWhereInput>;
-  AND?: Maybe<SeriesSubscriptionWhereInput[] | SeriesSubscriptionWhereInput>;
-  OR?: Maybe<SeriesSubscriptionWhereInput[] | SeriesSubscriptionWhereInput>;
-  NOT?: Maybe<SeriesSubscriptionWhereInput[] | SeriesSubscriptionWhereInput>;
-}
-
-export interface BookUpdateManyMutationInput {
-  title?: Maybe<String>;
-  era?: Maybe<String>;
-  author?: Maybe<ID_Input>;
-  releaseDate?: Maybe<String>;
-  imageId?: Maybe<String>;
-  summary?: Maybe<String>;
-  pages?: Maybe<Int>;
-  isbn?: Maybe<Int>;
-  timeLine?: Maybe<String>;
-  series?: Maybe<String>;
-  bookStatus?: Maybe<ID_Input>;
-  epochTime?: Maybe<ID_Input>;
-}
-
-export interface BookStatusSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<BookStatusWhereInput>;
-  AND?: Maybe<
-    BookStatusSubscriptionWhereInput[] | BookStatusSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    BookStatusSubscriptionWhereInput[] | BookStatusSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    BookStatusSubscriptionWhereInput[] | BookStatusSubscriptionWhereInput
-  >;
+export interface BookUpsertWithWhereUniqueWithoutPostedByInput {
+  where: BookWhereUniqueInput;
+  update: BookUpdateWithoutPostedByDataInput;
+  create: BookCreateWithoutPostedByInput;
 }
 
 export interface BookUpdateInput {
   title?: Maybe<String>;
   era?: Maybe<String>;
-  author?: Maybe<ID_Input>;
+  author?: Maybe<String>;
   releaseDate?: Maybe<String>;
   imageId?: Maybe<String>;
   summary?: Maybe<String>;
@@ -814,19 +538,234 @@ export interface BookUpdateInput {
   isbn?: Maybe<Int>;
   timeLine?: Maybe<String>;
   series?: Maybe<String>;
-  bookStatus?: Maybe<ID_Input>;
-  epochTime?: Maybe<ID_Input>;
+  bookStatus?: Maybe<String>;
+  epochTime?: Maybe<String>;
+  postedBy?: Maybe<UserUpdateOneWithoutBooksInput>;
 }
 
-export interface SeriesUpdateManyMutationInput {
+export interface BookWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  dateAdded?: Maybe<DateTimeInput>;
+  dateAdded_not?: Maybe<DateTimeInput>;
+  dateAdded_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  dateAdded_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  dateAdded_lt?: Maybe<DateTimeInput>;
+  dateAdded_lte?: Maybe<DateTimeInput>;
+  dateAdded_gt?: Maybe<DateTimeInput>;
+  dateAdded_gte?: Maybe<DateTimeInput>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  era?: Maybe<String>;
+  era_not?: Maybe<String>;
+  era_in?: Maybe<String[] | String>;
+  era_not_in?: Maybe<String[] | String>;
+  era_lt?: Maybe<String>;
+  era_lte?: Maybe<String>;
+  era_gt?: Maybe<String>;
+  era_gte?: Maybe<String>;
+  era_contains?: Maybe<String>;
+  era_not_contains?: Maybe<String>;
+  era_starts_with?: Maybe<String>;
+  era_not_starts_with?: Maybe<String>;
+  era_ends_with?: Maybe<String>;
+  era_not_ends_with?: Maybe<String>;
+  author?: Maybe<String>;
+  author_not?: Maybe<String>;
+  author_in?: Maybe<String[] | String>;
+  author_not_in?: Maybe<String[] | String>;
+  author_lt?: Maybe<String>;
+  author_lte?: Maybe<String>;
+  author_gt?: Maybe<String>;
+  author_gte?: Maybe<String>;
+  author_contains?: Maybe<String>;
+  author_not_contains?: Maybe<String>;
+  author_starts_with?: Maybe<String>;
+  author_not_starts_with?: Maybe<String>;
+  author_ends_with?: Maybe<String>;
+  author_not_ends_with?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  releaseDate_not?: Maybe<String>;
+  releaseDate_in?: Maybe<String[] | String>;
+  releaseDate_not_in?: Maybe<String[] | String>;
+  releaseDate_lt?: Maybe<String>;
+  releaseDate_lte?: Maybe<String>;
+  releaseDate_gt?: Maybe<String>;
+  releaseDate_gte?: Maybe<String>;
+  releaseDate_contains?: Maybe<String>;
+  releaseDate_not_contains?: Maybe<String>;
+  releaseDate_starts_with?: Maybe<String>;
+  releaseDate_not_starts_with?: Maybe<String>;
+  releaseDate_ends_with?: Maybe<String>;
+  releaseDate_not_ends_with?: Maybe<String>;
+  imageId?: Maybe<String>;
+  imageId_not?: Maybe<String>;
+  imageId_in?: Maybe<String[] | String>;
+  imageId_not_in?: Maybe<String[] | String>;
+  imageId_lt?: Maybe<String>;
+  imageId_lte?: Maybe<String>;
+  imageId_gt?: Maybe<String>;
+  imageId_gte?: Maybe<String>;
+  imageId_contains?: Maybe<String>;
+  imageId_not_contains?: Maybe<String>;
+  imageId_starts_with?: Maybe<String>;
+  imageId_not_starts_with?: Maybe<String>;
+  imageId_ends_with?: Maybe<String>;
+  imageId_not_ends_with?: Maybe<String>;
+  summary?: Maybe<String>;
+  summary_not?: Maybe<String>;
+  summary_in?: Maybe<String[] | String>;
+  summary_not_in?: Maybe<String[] | String>;
+  summary_lt?: Maybe<String>;
+  summary_lte?: Maybe<String>;
+  summary_gt?: Maybe<String>;
+  summary_gte?: Maybe<String>;
+  summary_contains?: Maybe<String>;
+  summary_not_contains?: Maybe<String>;
+  summary_starts_with?: Maybe<String>;
+  summary_not_starts_with?: Maybe<String>;
+  summary_ends_with?: Maybe<String>;
+  summary_not_ends_with?: Maybe<String>;
+  pages?: Maybe<Int>;
+  pages_not?: Maybe<Int>;
+  pages_in?: Maybe<Int[] | Int>;
+  pages_not_in?: Maybe<Int[] | Int>;
+  pages_lt?: Maybe<Int>;
+  pages_lte?: Maybe<Int>;
+  pages_gt?: Maybe<Int>;
+  pages_gte?: Maybe<Int>;
+  isbn?: Maybe<Int>;
+  isbn_not?: Maybe<Int>;
+  isbn_in?: Maybe<Int[] | Int>;
+  isbn_not_in?: Maybe<Int[] | Int>;
+  isbn_lt?: Maybe<Int>;
+  isbn_lte?: Maybe<Int>;
+  isbn_gt?: Maybe<Int>;
+  isbn_gte?: Maybe<Int>;
+  timeLine?: Maybe<String>;
+  timeLine_not?: Maybe<String>;
+  timeLine_in?: Maybe<String[] | String>;
+  timeLine_not_in?: Maybe<String[] | String>;
+  timeLine_lt?: Maybe<String>;
+  timeLine_lte?: Maybe<String>;
+  timeLine_gt?: Maybe<String>;
+  timeLine_gte?: Maybe<String>;
+  timeLine_contains?: Maybe<String>;
+  timeLine_not_contains?: Maybe<String>;
+  timeLine_starts_with?: Maybe<String>;
+  timeLine_not_starts_with?: Maybe<String>;
+  timeLine_ends_with?: Maybe<String>;
+  timeLine_not_ends_with?: Maybe<String>;
+  series?: Maybe<String>;
+  series_not?: Maybe<String>;
+  series_in?: Maybe<String[] | String>;
+  series_not_in?: Maybe<String[] | String>;
+  series_lt?: Maybe<String>;
+  series_lte?: Maybe<String>;
+  series_gt?: Maybe<String>;
+  series_gte?: Maybe<String>;
+  series_contains?: Maybe<String>;
+  series_not_contains?: Maybe<String>;
+  series_starts_with?: Maybe<String>;
+  series_not_starts_with?: Maybe<String>;
+  series_ends_with?: Maybe<String>;
+  series_not_ends_with?: Maybe<String>;
+  bookStatus?: Maybe<String>;
+  bookStatus_not?: Maybe<String>;
+  bookStatus_in?: Maybe<String[] | String>;
+  bookStatus_not_in?: Maybe<String[] | String>;
+  bookStatus_lt?: Maybe<String>;
+  bookStatus_lte?: Maybe<String>;
+  bookStatus_gt?: Maybe<String>;
+  bookStatus_gte?: Maybe<String>;
+  bookStatus_contains?: Maybe<String>;
+  bookStatus_not_contains?: Maybe<String>;
+  bookStatus_starts_with?: Maybe<String>;
+  bookStatus_not_starts_with?: Maybe<String>;
+  bookStatus_ends_with?: Maybe<String>;
+  bookStatus_not_ends_with?: Maybe<String>;
+  epochTime?: Maybe<String>;
+  epochTime_not?: Maybe<String>;
+  epochTime_in?: Maybe<String[] | String>;
+  epochTime_not_in?: Maybe<String[] | String>;
+  epochTime_lt?: Maybe<String>;
+  epochTime_lte?: Maybe<String>;
+  epochTime_gt?: Maybe<String>;
+  epochTime_gte?: Maybe<String>;
+  epochTime_contains?: Maybe<String>;
+  epochTime_not_contains?: Maybe<String>;
+  epochTime_starts_with?: Maybe<String>;
+  epochTime_not_starts_with?: Maybe<String>;
+  epochTime_ends_with?: Maybe<String>;
+  epochTime_not_ends_with?: Maybe<String>;
+  postedBy?: Maybe<UserWhereInput>;
+  AND?: Maybe<BookWhereInput[] | BookWhereInput>;
+  OR?: Maybe<BookWhereInput[] | BookWhereInput>;
+  NOT?: Maybe<BookWhereInput[] | BookWhereInput>;
+}
+
+export interface UserUpdateInput {
   name?: Maybe<String>;
+  password?: Maybe<String>;
+  books?: Maybe<BookUpdateManyWithoutPostedByInput>;
 }
 
-export interface BookCreateInput {
+export interface UserUpdateManyMutationInput {
+  name?: Maybe<String>;
+  password?: Maybe<String>;
+}
+
+export interface BookCreateManyWithoutPostedByInput {
+  create?: Maybe<
+    BookCreateWithoutPostedByInput[] | BookCreateWithoutPostedByInput
+  >;
+  connect?: Maybe<BookWhereUniqueInput[] | BookWhereUniqueInput>;
+}
+
+export interface BookUpdateManyMutationInput {
+  title?: Maybe<String>;
+  era?: Maybe<String>;
+  author?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  imageId?: Maybe<String>;
+  summary?: Maybe<String>;
+  pages?: Maybe<Int>;
+  isbn?: Maybe<Int>;
+  timeLine?: Maybe<String>;
+  series?: Maybe<String>;
+  bookStatus?: Maybe<String>;
+  epochTime?: Maybe<String>;
+}
+
+export interface BookCreateWithoutPostedByInput {
   id?: Maybe<ID_Input>;
   title: String;
   era: String;
-  author: ID_Input;
+  author: String;
   releaseDate: String;
   imageId: String;
   summary: String;
@@ -834,220 +773,205 @@ export interface BookCreateInput {
   isbn: Int;
   timeLine: String;
   series?: Maybe<String>;
-  bookStatus: ID_Input;
-  epochTime: ID_Input;
+  bookStatus: String;
+  epochTime: String;
 }
 
-export interface BookStatusWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  dateAdded?: Maybe<DateTimeInput>;
-  dateAdded_not?: Maybe<DateTimeInput>;
-  dateAdded_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  dateAdded_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  dateAdded_lt?: Maybe<DateTimeInput>;
-  dateAdded_lte?: Maybe<DateTimeInput>;
-  dateAdded_gt?: Maybe<DateTimeInput>;
-  dateAdded_gte?: Maybe<DateTimeInput>;
+export interface UserUpdateWithoutBooksDataInput {
   name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<BookStatusWhereInput[] | BookStatusWhereInput>;
-  OR?: Maybe<BookStatusWhereInput[] | BookStatusWhereInput>;
-  NOT?: Maybe<BookStatusWhereInput[] | BookStatusWhereInput>;
+  password?: Maybe<String>;
 }
 
-export interface SeriesWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  dateAdded?: Maybe<DateTimeInput>;
-  dateAdded_not?: Maybe<DateTimeInput>;
-  dateAdded_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  dateAdded_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  dateAdded_lt?: Maybe<DateTimeInput>;
-  dateAdded_lte?: Maybe<DateTimeInput>;
-  dateAdded_gt?: Maybe<DateTimeInput>;
-  dateAdded_gte?: Maybe<DateTimeInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<SeriesWhereInput[] | SeriesWhereInput>;
-  OR?: Maybe<SeriesWhereInput[] | SeriesWhereInput>;
-  NOT?: Maybe<SeriesWhereInput[] | SeriesWhereInput>;
+export interface BookUpdateManyWithWhereNestedInput {
+  where: BookScalarWhereInput;
+  data: BookUpdateManyDataInput;
 }
 
-export interface AuthorUpdateInput {
-  name?: Maybe<String>;
-}
-
-export type SeriesWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface AuthorUpdateManyMutationInput {
-  name?: Maybe<String>;
-}
-
-export interface EraUpdateManyMutationInput {
-  name?: Maybe<String>;
-}
-
-export type BookStatusWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface BookSubscriptionWhereInput {
+export interface UserSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<BookWhereInput>;
-  AND?: Maybe<BookSubscriptionWhereInput[] | BookSubscriptionWhereInput>;
-  OR?: Maybe<BookSubscriptionWhereInput[] | BookSubscriptionWhereInput>;
-  NOT?: Maybe<BookSubscriptionWhereInput[] | BookSubscriptionWhereInput>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
 
-export interface EpochTimeSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<EpochTimeWhereInput>;
-  AND?: Maybe<
-    EpochTimeSubscriptionWhereInput[] | EpochTimeSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    EpochTimeSubscriptionWhereInput[] | EpochTimeSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    EpochTimeSubscriptionWhereInput[] | EpochTimeSubscriptionWhereInput
-  >;
+export interface BookUpdateWithoutPostedByDataInput {
+  title?: Maybe<String>;
+  era?: Maybe<String>;
+  author?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  imageId?: Maybe<String>;
+  summary?: Maybe<String>;
+  pages?: Maybe<Int>;
+  isbn?: Maybe<Int>;
+  timeLine?: Maybe<String>;
+  series?: Maybe<String>;
+  bookStatus?: Maybe<String>;
+  epochTime?: Maybe<String>;
 }
 
-export interface EraCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-}
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  name?: Maybe<String>;
+}>;
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface SeriesPreviousValues {
+export interface UserPreviousValues {
   id: ID_Output;
-  dateAdded: DateTimeOutput;
   name: String;
+  password: String;
 }
 
-export interface SeriesPreviousValuesPromise
-  extends Promise<SeriesPreviousValues>,
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  password: () => Promise<String>;
+}
+
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+}
+
+export interface BookPreviousValues {
+  id: ID_Output;
+  dateAdded: DateTimeOutput;
+  title: String;
+  era: String;
+  author: String;
+  releaseDate: String;
+  imageId: String;
+  summary: String;
+  pages: Int;
+  isbn: Int;
+  timeLine: String;
+  series?: String;
+  bookStatus: String;
+  epochTime: String;
+}
+
+export interface BookPreviousValuesPromise
+  extends Promise<BookPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
+  title: () => Promise<String>;
+  era: () => Promise<String>;
+  author: () => Promise<String>;
+  releaseDate: () => Promise<String>;
+  imageId: () => Promise<String>;
+  summary: () => Promise<String>;
+  pages: () => Promise<Int>;
+  isbn: () => Promise<Int>;
+  timeLine: () => Promise<String>;
+  series: () => Promise<String>;
+  bookStatus: () => Promise<String>;
+  epochTime: () => Promise<String>;
 }
 
-export interface SeriesPreviousValuesSubscription
-  extends Promise<AsyncIterator<SeriesPreviousValues>>,
+export interface BookPreviousValuesSubscription
+  extends Promise<AsyncIterator<BookPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
+  era: () => Promise<AsyncIterator<String>>;
+  author: () => Promise<AsyncIterator<String>>;
+  releaseDate: () => Promise<AsyncIterator<String>>;
+  imageId: () => Promise<AsyncIterator<String>>;
+  summary: () => Promise<AsyncIterator<String>>;
+  pages: () => Promise<AsyncIterator<Int>>;
+  isbn: () => Promise<AsyncIterator<Int>>;
+  timeLine: () => Promise<AsyncIterator<String>>;
+  series: () => Promise<AsyncIterator<String>>;
+  bookStatus: () => Promise<AsyncIterator<String>>;
+  epochTime: () => Promise<AsyncIterator<String>>;
 }
 
-export interface BookStatus {
+export interface Book {
   id: ID_Output;
   dateAdded: DateTimeOutput;
-  name: String;
+  title: String;
+  era: String;
+  author: String;
+  releaseDate: String;
+  imageId: String;
+  summary: String;
+  pages: Int;
+  isbn: Int;
+  timeLine: String;
+  series?: String;
+  bookStatus: String;
+  epochTime: String;
 }
 
-export interface BookStatusPromise extends Promise<BookStatus>, Fragmentable {
+export interface BookPromise extends Promise<Book>, Fragmentable {
   id: () => Promise<ID_Output>;
   dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
+  title: () => Promise<String>;
+  era: () => Promise<String>;
+  author: () => Promise<String>;
+  releaseDate: () => Promise<String>;
+  imageId: () => Promise<String>;
+  summary: () => Promise<String>;
+  pages: () => Promise<Int>;
+  isbn: () => Promise<Int>;
+  timeLine: () => Promise<String>;
+  series: () => Promise<String>;
+  bookStatus: () => Promise<String>;
+  epochTime: () => Promise<String>;
+  postedBy: <T = UserPromise>() => T;
 }
 
-export interface BookStatusSubscription
-  extends Promise<AsyncIterator<BookStatus>>,
+export interface BookSubscription
+  extends Promise<AsyncIterator<Book>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
+  era: () => Promise<AsyncIterator<String>>;
+  author: () => Promise<AsyncIterator<String>>;
+  releaseDate: () => Promise<AsyncIterator<String>>;
+  imageId: () => Promise<AsyncIterator<String>>;
+  summary: () => Promise<AsyncIterator<String>>;
+  pages: () => Promise<AsyncIterator<Int>>;
+  isbn: () => Promise<AsyncIterator<Int>>;
+  timeLine: () => Promise<AsyncIterator<String>>;
+  series: () => Promise<AsyncIterator<String>>;
+  bookStatus: () => Promise<AsyncIterator<String>>;
+  epochTime: () => Promise<AsyncIterator<String>>;
+  postedBy: <T = UserSubscription>() => T;
 }
 
-export interface BookStatusNullablePromise
-  extends Promise<BookStatus | null>,
+export interface BookNullablePromise
+  extends Promise<Book | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-}
-
-export interface AuthorConnection {
-  pageInfo: PageInfo;
-  edges: AuthorEdge[];
-}
-
-export interface AuthorConnectionPromise
-  extends Promise<AuthorConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<AuthorEdge>>() => T;
-  aggregate: <T = AggregateAuthorPromise>() => T;
-}
-
-export interface AuthorConnectionSubscription
-  extends Promise<AsyncIterator<AuthorConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<AuthorEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateAuthorSubscription>() => T;
+  title: () => Promise<String>;
+  era: () => Promise<String>;
+  author: () => Promise<String>;
+  releaseDate: () => Promise<String>;
+  imageId: () => Promise<String>;
+  summary: () => Promise<String>;
+  pages: () => Promise<Int>;
+  isbn: () => Promise<Int>;
+  timeLine: () => Promise<String>;
+  series: () => Promise<String>;
+  bookStatus: () => Promise<String>;
+  epochTime: () => Promise<String>;
+  postedBy: <T = UserPromise>() => T;
 }
 
 export interface AggregateBook {
@@ -1064,27 +988,6 @@ export interface AggregateBookSubscription
   extends Promise<AsyncIterator<AggregateBook>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface SeriesConnection {
-  pageInfo: PageInfo;
-  edges: SeriesEdge[];
-}
-
-export interface SeriesConnectionPromise
-  extends Promise<SeriesConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<SeriesEdge>>() => T;
-  aggregate: <T = AggregateSeriesPromise>() => T;
-}
-
-export interface SeriesConnectionSubscription
-  extends Promise<AsyncIterator<SeriesConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<SeriesEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateSeriesSubscription>() => T;
 }
 
 export interface BookEdge {
@@ -1104,20 +1007,29 @@ export interface BookEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateSeries {
-  count: Int;
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
 }
 
-export interface AggregateSeriesPromise
-  extends Promise<AggregateSeries>,
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
     Fragmentable {
-  count: () => Promise<Int>;
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
 }
 
-export interface AggregateSeriesSubscription
-  extends Promise<AsyncIterator<AggregateSeries>>,
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
 export interface BookConnection {
@@ -1141,288 +1053,27 @@ export interface BookConnectionSubscription
   aggregate: <T = AggregateBookSubscription>() => T;
 }
 
-export interface AggregateEra {
-  count: Int;
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
 }
 
-export interface AggregateEraPromise
-  extends Promise<AggregateEra>,
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateEraSubscription
-  extends Promise<AsyncIterator<AggregateEra>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface Series {
-  id: ID_Output;
-  dateAdded: DateTimeOutput;
-  name: String;
-}
-
-export interface SeriesPromise extends Promise<Series>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-}
-
-export interface SeriesSubscription
-  extends Promise<AsyncIterator<Series>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface SeriesNullablePromise
-  extends Promise<Series | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-}
-
-export interface AuthorEdge {
-  node: Author;
-  cursor: String;
-}
-
-export interface AuthorEdgePromise extends Promise<AuthorEdge>, Fragmentable {
-  node: <T = AuthorPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface AuthorEdgeSubscription
-  extends Promise<AsyncIterator<AuthorEdge>>,
-    Fragmentable {
-  node: <T = AuthorSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface Author {
-  id: ID_Output;
-  dateAdded: DateTimeOutput;
-  name: String;
-}
-
-export interface AuthorPromise extends Promise<Author>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-}
-
-export interface AuthorSubscription
-  extends Promise<AsyncIterator<Author>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AuthorNullablePromise
-  extends Promise<Author | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-}
-
-export interface EraEdge {
-  node: Era;
-  cursor: String;
-}
-
-export interface EraEdgePromise extends Promise<EraEdge>, Fragmentable {
-  node: <T = EraPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface EraEdgeSubscription
-  extends Promise<AsyncIterator<EraEdge>>,
-    Fragmentable {
-  node: <T = EraSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface SeriesSubscriptionPayload {
-  mutation: MutationType;
-  node: Series;
-  updatedFields: String[];
-  previousValues: SeriesPreviousValues;
-}
-
-export interface SeriesSubscriptionPayloadPromise
-  extends Promise<SeriesSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = SeriesPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = SeriesPreviousValuesPromise>() => T;
-}
-
-export interface SeriesSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<SeriesSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = SeriesSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = SeriesPreviousValuesSubscription>() => T;
-}
-
-export interface AuthorSubscriptionPayload {
-  mutation: MutationType;
-  node: Author;
-  updatedFields: String[];
-  previousValues: AuthorPreviousValues;
-}
-
-export interface AuthorSubscriptionPayloadPromise
-  extends Promise<AuthorSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = AuthorPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = AuthorPreviousValuesPromise>() => T;
-}
-
-export interface AuthorSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<AuthorSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = AuthorSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = AuthorPreviousValuesSubscription>() => T;
-}
-
-export interface AggregateEpochTime {
-  count: Int;
-}
-
-export interface AggregateEpochTimePromise
-  extends Promise<AggregateEpochTime>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateEpochTimeSubscription
-  extends Promise<AsyncIterator<AggregateEpochTime>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface AuthorPreviousValues {
-  id: ID_Output;
-  dateAdded: DateTimeOutput;
-  name: String;
-}
-
-export interface AuthorPreviousValuesPromise
-  extends Promise<AuthorPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-}
-
-export interface AuthorPreviousValuesSubscription
-  extends Promise<AsyncIterator<AuthorPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface EpochTimeConnection {
-  pageInfo: PageInfo;
-  edges: EpochTimeEdge[];
-}
-
-export interface EpochTimeConnectionPromise
-  extends Promise<EpochTimeConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<EpochTimeEdge>>() => T;
-  aggregate: <T = AggregateEpochTimePromise>() => T;
-}
-
-export interface EpochTimeConnectionSubscription
-  extends Promise<AsyncIterator<EpochTimeConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<EpochTimeEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateEpochTimeSubscription>() => T;
-}
-
-export interface EraSubscriptionPayload {
-  mutation: MutationType;
-  node: Era;
-  updatedFields: String[];
-  previousValues: EraPreviousValues;
-}
-
-export interface EraSubscriptionPayloadPromise
-  extends Promise<EraSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = EraPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = EraPreviousValuesPromise>() => T;
-}
-
-export interface EraSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<EraSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = EraSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = EraPreviousValuesSubscription>() => T;
-}
-
-export interface EpochTime {
-  id: ID_Output;
-  dateAdded: DateTimeOutput;
-  name: String;
-}
-
-export interface EpochTimePromise extends Promise<EpochTime>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-}
-
-export interface EpochTimeSubscription
-  extends Promise<AsyncIterator<EpochTime>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface EpochTimeNullablePromise
-  extends Promise<EpochTime | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface BookSubscriptionPayload {
@@ -1450,426 +1101,137 @@ export interface BookSubscriptionPayloadSubscription
   previousValues: <T = BookPreviousValuesSubscription>() => T;
 }
 
-export interface BookStatusEdge {
-  node: BookStatus;
-  cursor: String;
+export interface BatchPayload {
+  count: Long;
 }
 
-export interface BookStatusEdgePromise
-  extends Promise<BookStatusEdge>,
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
     Fragmentable {
-  node: <T = BookStatusPromise>() => T;
-  cursor: () => Promise<String>;
+  count: () => Promise<Long>;
 }
 
-export interface BookStatusEdgeSubscription
-  extends Promise<AsyncIterator<BookStatusEdge>>,
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
-  node: <T = BookStatusSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface BookPreviousValues {
-  id: ID_Output;
-  dateAdded: DateTimeOutput;
-  title: String;
-  era: String;
-  author: ID_Output;
-  releaseDate: String;
-  imageId: String;
-  summary: String;
-  pages: Int;
-  isbn: Int;
-  timeLine: String;
-  series?: String;
-  bookStatus: ID_Output;
-  epochTime: ID_Output;
-}
-
-export interface BookPreviousValuesPromise
-  extends Promise<BookPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  title: () => Promise<String>;
-  era: () => Promise<String>;
-  author: () => Promise<ID_Output>;
-  releaseDate: () => Promise<String>;
-  imageId: () => Promise<String>;
-  summary: () => Promise<String>;
-  pages: () => Promise<Int>;
-  isbn: () => Promise<Int>;
-  timeLine: () => Promise<String>;
-  series: () => Promise<String>;
-  bookStatus: () => Promise<ID_Output>;
-  epochTime: () => Promise<ID_Output>;
-}
-
-export interface BookPreviousValuesSubscription
-  extends Promise<AsyncIterator<BookPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
-  title: () => Promise<AsyncIterator<String>>;
-  era: () => Promise<AsyncIterator<String>>;
-  author: () => Promise<AsyncIterator<ID_Output>>;
-  releaseDate: () => Promise<AsyncIterator<String>>;
-  imageId: () => Promise<AsyncIterator<String>>;
-  summary: () => Promise<AsyncIterator<String>>;
-  pages: () => Promise<AsyncIterator<Int>>;
-  isbn: () => Promise<AsyncIterator<Int>>;
-  timeLine: () => Promise<AsyncIterator<String>>;
-  series: () => Promise<AsyncIterator<String>>;
-  bookStatus: () => Promise<AsyncIterator<ID_Output>>;
-  epochTime: () => Promise<AsyncIterator<ID_Output>>;
-}
-
-export interface SeriesEdge {
-  node: Series;
-  cursor: String;
-}
-
-export interface SeriesEdgePromise extends Promise<SeriesEdge>, Fragmentable {
-  node: <T = SeriesPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface SeriesEdgeSubscription
-  extends Promise<AsyncIterator<SeriesEdge>>,
-    Fragmentable {
-  node: <T = SeriesSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface Book {
-  id: ID_Output;
-  dateAdded: DateTimeOutput;
-  title: String;
-  era: String;
-  author: ID_Output;
-  releaseDate: String;
-  imageId: String;
-  summary: String;
-  pages: Int;
-  isbn: Int;
-  timeLine: String;
-  series?: String;
-  bookStatus: ID_Output;
-  epochTime: ID_Output;
-}
-
-export interface BookPromise extends Promise<Book>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  title: () => Promise<String>;
-  era: () => Promise<String>;
-  author: () => Promise<ID_Output>;
-  releaseDate: () => Promise<String>;
-  imageId: () => Promise<String>;
-  summary: () => Promise<String>;
-  pages: () => Promise<Int>;
-  isbn: () => Promise<Int>;
-  timeLine: () => Promise<String>;
-  series: () => Promise<String>;
-  bookStatus: () => Promise<ID_Output>;
-  epochTime: () => Promise<ID_Output>;
-}
-
-export interface BookSubscription
-  extends Promise<AsyncIterator<Book>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
-  title: () => Promise<AsyncIterator<String>>;
-  era: () => Promise<AsyncIterator<String>>;
-  author: () => Promise<AsyncIterator<ID_Output>>;
-  releaseDate: () => Promise<AsyncIterator<String>>;
-  imageId: () => Promise<AsyncIterator<String>>;
-  summary: () => Promise<AsyncIterator<String>>;
-  pages: () => Promise<AsyncIterator<Int>>;
-  isbn: () => Promise<AsyncIterator<Int>>;
-  timeLine: () => Promise<AsyncIterator<String>>;
-  series: () => Promise<AsyncIterator<String>>;
-  bookStatus: () => Promise<AsyncIterator<ID_Output>>;
-  epochTime: () => Promise<AsyncIterator<ID_Output>>;
-}
-
-export interface BookNullablePromise
-  extends Promise<Book | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  title: () => Promise<String>;
-  era: () => Promise<String>;
-  author: () => Promise<ID_Output>;
-  releaseDate: () => Promise<String>;
-  imageId: () => Promise<String>;
-  summary: () => Promise<String>;
-  pages: () => Promise<Int>;
-  isbn: () => Promise<Int>;
-  timeLine: () => Promise<String>;
-  series: () => Promise<String>;
-  bookStatus: () => Promise<ID_Output>;
-  epochTime: () => Promise<ID_Output>;
-}
-
-export interface EraConnection {
-  pageInfo: PageInfo;
-  edges: EraEdge[];
-}
-
-export interface EraConnectionPromise
-  extends Promise<EraConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<EraEdge>>() => T;
-  aggregate: <T = AggregateEraPromise>() => T;
-}
-
-export interface EraConnectionSubscription
-  extends Promise<AsyncIterator<EraConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<EraEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateEraSubscription>() => T;
-}
-
-export interface BookStatusSubscriptionPayload {
-  mutation: MutationType;
-  node: BookStatus;
-  updatedFields: String[];
-  previousValues: BookStatusPreviousValues;
-}
-
-export interface BookStatusSubscriptionPayloadPromise
-  extends Promise<BookStatusSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = BookStatusPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = BookStatusPreviousValuesPromise>() => T;
-}
-
-export interface BookStatusSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<BookStatusSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = BookStatusSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = BookStatusPreviousValuesSubscription>() => T;
-}
-
-export interface EpochTimeEdge {
-  node: EpochTime;
-  cursor: String;
-}
-
-export interface EpochTimeEdgePromise
-  extends Promise<EpochTimeEdge>,
-    Fragmentable {
-  node: <T = EpochTimePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface EpochTimeEdgeSubscription
-  extends Promise<AsyncIterator<EpochTimeEdge>>,
-    Fragmentable {
-  node: <T = EpochTimeSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateBookStatus {
+export interface AggregateUser {
   count: Int;
 }
 
-export interface AggregateBookStatusPromise
-  extends Promise<AggregateBookStatus>,
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateBookStatusSubscription
-  extends Promise<AsyncIterator<AggregateBookStatus>>,
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface EpochTimePreviousValues {
+export interface User {
   id: ID_Output;
-  dateAdded: DateTimeOutput;
   name: String;
+  password: String;
 }
 
-export interface EpochTimePreviousValuesPromise
-  extends Promise<EpochTimePreviousValues>,
-    Fragmentable {
+export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
+  password: () => Promise<String>;
+  books: <T = FragmentableArray<Book>>(args?: {
+    where?: BookWhereInput;
+    orderBy?: BookOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface EpochTimePreviousValuesSubscription
-  extends Promise<AsyncIterator<EpochTimePreviousValues>>,
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
   name: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  books: <T = Promise<AsyncIterator<BookSubscription>>>(args?: {
+    where?: BookWhereInput;
+    orderBy?: BookOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface EpochTimeSubscriptionPayload {
-  mutation: MutationType;
-  node: EpochTime;
-  updatedFields: String[];
-  previousValues: EpochTimePreviousValues;
-}
-
-export interface EpochTimeSubscriptionPayloadPromise
-  extends Promise<EpochTimeSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = EpochTimePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = EpochTimePreviousValuesPromise>() => T;
-}
-
-export interface EpochTimeSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<EpochTimeSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = EpochTimeSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = EpochTimePreviousValuesSubscription>() => T;
-}
-
-export interface AggregateAuthor {
-  count: Int;
-}
-
-export interface AggregateAuthorPromise
-  extends Promise<AggregateAuthor>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateAuthorSubscription
-  extends Promise<AsyncIterator<AggregateAuthor>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BookStatusPreviousValues {
-  id: ID_Output;
-  dateAdded: DateTimeOutput;
-  name: String;
-}
-
-export interface BookStatusPreviousValuesPromise
-  extends Promise<BookStatusPreviousValues>,
+export interface UserNullablePromise
+  extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
+  password: () => Promise<String>;
+  books: <T = FragmentableArray<Book>>(args?: {
+    where?: BookWhereInput;
+    orderBy?: BookOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface BookStatusPreviousValuesSubscription
-  extends Promise<AsyncIterator<BookStatusPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface BookStatusConnection {
+export interface UserConnection {
   pageInfo: PageInfo;
-  edges: BookStatusEdge[];
+  edges: UserEdge[];
 }
 
-export interface BookStatusConnectionPromise
-  extends Promise<BookStatusConnection>,
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<BookStatusEdge>>() => T;
-  aggregate: <T = AggregateBookStatusPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
 }
 
-export interface BookStatusConnectionSubscription
-  extends Promise<AsyncIterator<BookStatusConnection>>,
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<BookStatusEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateBookStatusSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface EraPreviousValues {
-  id: ID_Output;
-  dateAdded: DateTimeOutput;
-  name: String;
+export interface UserEdge {
+  node: User;
+  cursor: String;
 }
 
-export interface EraPreviousValuesPromise
-  extends Promise<EraPreviousValues>,
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface EraPreviousValuesSubscription
-  extends Promise<AsyncIterator<EraPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
 
-export interface Era {
-  id: ID_Output;
-  dateAdded: DateTimeOutput;
-  name: String;
-}
-
-export interface EraPromise extends Promise<Era>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-}
-
-export interface EraSubscription
-  extends Promise<AsyncIterator<Era>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  dateAdded: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface EraNullablePromise extends Promise<Era | null>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  dateAdded: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
+export type Long = string;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -1877,7 +1239,10 @@ The `ID` scalar type represents a unique identifier, often used to refetch an ob
 export type ID_Input = string | number;
 export type ID_Output = string;
 
-export type Long = string;
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /*
 DateTime scalar input type, allowing Date
@@ -1894,16 +1259,6 @@ The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
 
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
-
 /**
  * Model Metadata
  */
@@ -1914,23 +1269,7 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "Era",
-    embedded: false
-  },
-  {
-    name: "Author",
-    embedded: false
-  },
-  {
-    name: "Series",
-    embedded: false
-  },
-  {
-    name: "BookStatus",
-    embedded: false
-  },
-  {
-    name: "EpochTime",
+    name: "User",
     embedded: false
   }
 ];

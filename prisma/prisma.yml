@@ -1,4 +1,5 @@
 #endpoint: ''
+#endpoint: https://eu1.prisma.sh/rosemariesousa-7647ba/jedi_library/dev
 endpoint: https://eu1.prisma.sh/rosemariesousa-7647ba/jedi_library/dev
 
 datamodel: datamodel.prisma

@@ -9,23 +9,7 @@ var models = [
     embedded: false
   },
   {
-    name: "Era",
-    embedded: false
-  },
-  {
-    name: "Author",
-    embedded: false
-  },
-  {
-    name: "Series",
-    embedded: false
-  },
-  {
-    name: "BookStatus",
-    embedded: false
-  },
-  {
-    name: "EpochTime",
+    name: "User",
     embedded: false
   }
 ];
